@@ -34,6 +34,7 @@ export class TaskService {
     this.taskListObs.next(this.tasks);
   }
   markAsDone(task: Task) {
+    task.endDate = new Date();
     this.finishedTasks.push(task);
     this.remove(task);
     this.taskDoneObs.next(this.finishedTasks);

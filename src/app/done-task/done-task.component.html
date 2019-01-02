@@ -2,7 +2,7 @@
     <p>Number of finished tasks: {{finishedTasks.length}} </p>
   </ng-container>
   <ul>
-    <li *ngFor="let ftask of finishedTasks">
+    <li appDate [date]="ftask.endDate" appChecked *ngFor="let ftask of finishedTasks">
       {{ftask.name}}
     </li>
   </ul>
