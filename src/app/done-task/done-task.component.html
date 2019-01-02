@@ -1,0 +1,10 @@
+<ng-container *ngIf="finishedTasks.length > 0">
+    <p>Number of finished tasks: {{finishedTasks.length}} </p>
+  </ng-container>
+  <ul>
+    <li *ngFor="let ftask of finishedTasks">
+      {{ftask}}
+    </li>
+  </ul>
+<!-- if we want to display content from another componetnt we must use <ng-content> tag -->
+  <ng-content></ng-content>
