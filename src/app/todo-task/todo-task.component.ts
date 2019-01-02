@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TaskService } from '../service/task.service';
+import { Task } from '../model/task';
 
 @Component({
   selector: 'app-todo-task',
@@ -22,11 +23,11 @@ export class TodoTaskComponent implements OnInit {
   ngOnInit() {
   }
 
-  markAsDone(task: string) {
+  markAsDone(task: Task) {
     this.taskService.markAsDone(task);
   }
 
-  remove(task: string) {
+  remove(task: Task) {
     this.taskService.remove(task);
   }
 
