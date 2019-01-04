@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TaskService } from './service/task.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-task-manager';
+
+  constructor(private taskService: TaskService) {}
+
+  addTasksToDB() {
+    this.taskService.addTasksToDB();
+  }
 }
