@@ -1,5 +1,7 @@
 export interface Task {
+  _id?: {$oid: string};
   name: string;
-  createDate: Date;
-  endDate?: Date;
+  createDate: string;
+  endDate?: string;
+  isDone: boolean;
 }

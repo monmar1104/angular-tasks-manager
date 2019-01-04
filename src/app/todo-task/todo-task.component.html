@@ -3,8 +3,8 @@
         <p [ngStyle]="{color: getColor()}">Number of tasks: {{tasks.length}} </p>
       </ng-container>
   <ul>
-    <li appDate [date]="task.createDate" *ngFor="let task of tasks; let odd = odd" [ngClass]="{'odd-li': odd, 'last-li': tasks.length===1 }">
-      {{task.name}}
+    <li appDate [date]="task.createDate" *ngFor="let task of tasks | sortName; let odd = odd" [ngClass]="{'odd-li': odd, 'last-li': tasks.length===1 }">
+      {{task.name | transformTask: '!'}}
       <button type="button" class="btn btn-danger" (click)="remove(task)">Remove</button>
       <button type="button" class="btn btn-success" (click)="markAsDone(task)">Mark as done</button>
     </li>

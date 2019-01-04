@@ -5,47 +5,41 @@ import { Task } from '../model/task';
 @Injectable()
 export class TaskService {
 
-  private tasks: Array<Task> = [];
-  private finishedTasks: Array<Task> = [];
-
   private taskListObs = new BehaviorSubject<Array<Task>>([]);
-  private taskDoneObs = new BehaviorSubject<Array<Task>>([]);
 
   constructor() {
-    this.tasks = [
-      {name: '1. Zakupy', createDate: new Date()},
-      {name: '2. Śniadanie', createDate: new Date()},
-      {name: '3. Praca', createDate: new Date()},
-      {name: '4. Obiad', createDate: new Date()},
-      {name: '5. Angielski', createDate: new Date()},
-      {name: '6. Praca', createDate: new Date()}
+    const tasks = [
+      {name: 'Zakupy', createDate: new Date().toLocaleString(), isDone: false},
+      {name: 'Śniadnie', createDate: new Date().toLocaleString(), isDone: false},
+      {name: 'Praca', createDate: new Date().toLocaleString(), isDone: false},
+      {name: 'Obiad', createDate: new Date().toLocaleString(), isDone: false},
+      {name: 'Angielski', createDate: new Date().toLocaleString(), isDone: false},
+      {name: 'Kodowanie', createDate: new Date().toLocaleString(), endDate: new Date().toLocaleString(), isDone: true},
+      {name: 'Praca', createDate: new Date().toLocaleString(), isDone: false}
     ];
-    this.taskListObs.next(this.tasks);
+    this.taskListObs.next(tasks);
   }
 
   add(task: Task) {
-    this.tasks.push(task);
-    this.taskListObs.next(this.tasks);
-    console.log(this.tasks);
+    const taskList = this.taskListObs.getValue();
+    taskList.push(task);
+    this.taskListObs.next(taskList);
+    console.log(taskList);
   }
 
   remove(task: Task) {
-    this.tasks = this.tasks.filter(t => t !== task);
-    this.taskListObs.next(this.tasks);
+    const taskList = this.taskListObs.getValue().filter(t => t !== task);
+    this.taskListObs.next(taskList);
   }
   markAsDone(task: Task) {
-    task.endDate = new Date();
-    this.finishedTasks.push(task);
-    this.remove(task);
-    this.taskDoneObs.next(this.finishedTasks);
-    console.log(this.finishedTasks);
+    task.endDate = new Date().toLocaleString();
+    task.isDone = true;
+    const newTaskList = this.taskListObs.getValue();
+    this.taskListObs.next(newTaskList);
   }
 
   getTasksTodoObs(): Observable<Array<Task>> {
     return this.taskListObs.asObservable();
   }
 
-  getTasksDoneObs(): Observable<Array<Task>> {
-    return this.taskDoneObs.asObservable();
-  }
 }

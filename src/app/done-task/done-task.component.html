@@ -3,7 +3,7 @@
   </ng-container>
   <ul>
     <li appDate [date]="ftask.endDate" appChecked *ngFor="let ftask of finishedTasks">
-      {{ftask.name}}
+      {{ftask.name | transformTask: ' - wykonane'}}
     </li>
   </ul>
 <!-- if we want to display content from another componetnt we must use <ng-content> tag -->

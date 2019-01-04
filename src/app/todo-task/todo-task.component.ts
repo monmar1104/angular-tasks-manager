@@ -11,13 +11,12 @@ import { Task } from '../model/task';
 export class TodoTaskComponent implements OnInit {
 
 
-  tasks = [];
+  tasks: Array<Task> = [];
 
   constructor(private taskService: TaskService) {
-    this.taskService.getTasksTodoObs().subscribe(taskList => {
-      this.tasks = taskList;
+    this.taskService.getTasksTodoObs().subscribe((taskList: Array<Task>) => {
+      this.tasks = taskList.slice().filter(t => !t.isDone);
     });
-    console.log(this.tasks);
    }
 
   ngOnInit() {
